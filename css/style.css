@@ -73,6 +73,9 @@ nav {
     padding: 0.5rem 1rem;
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .nav-links li a::after {
@@ -146,6 +149,114 @@ nav {
     font-size: 1.5rem;
     font-weight: 400;
     opacity: 0.9;
+}
+
+/* About Section */
+.about {
+    padding: 8rem 5%;
+    background: rgba(247, 247, 247, 0.8);
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.about-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.about h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.about h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--highlight-color);
+    border-radius: 2px;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.about-text h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill-category h4 {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.skill-category ul {
+    list-style: none;
+}
+
+.skill-category li {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.skill-category li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--highlight-color);
+}
+
+/* Media Queries for About Section */
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        padding: 4rem 5%;
+    }
 }
 
 /* Projects Section */
@@ -448,4 +559,13 @@ footer {
     .project-card {
         padding: 1.5rem;
     }
+}
+
+/* Update the resume link specific styles */
+.nav-links a[href="resume.html"] {
+    color: var(--highlight-color);
+}
+
+.nav-links a i {
+    margin-left: 0;
 } 

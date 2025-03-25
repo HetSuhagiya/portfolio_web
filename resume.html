@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Het Suhagiya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f7f7f7;
+        }
+
+        .header {
+            background: #2D3250;
+            color: white;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #F6B17A;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .resume-container {
+            width: 100%;
+            height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #resume-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+        <h1>My Resume</h1>
+    </div>
+    
+    <div class="resume-container">
+        <iframe 
+            id="resume-viewer"
+            src="https://drive.google.com/file/d/1PZ4r8exujnUdJLpM0IREj6vHjaJQbh9U/preview"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </div>
+</body>
+</html> 
