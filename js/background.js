@@ -16,6 +16,9 @@ class ParticleBackground {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.container.appendChild(this.renderer.domElement);
 
+        // Increase camera distance for larger view
+        this.camera.position.z = 50;  // Increased from 40
+
         // Create flow lines group
         this.flowLines = new THREE.Group();
         this.scene.add(this.flowLines);
@@ -34,8 +37,6 @@ class ParticleBackground {
         this.pointsPerLine = 100;
         this.createFlowLines();
         
-        this.camera.position.z = 40;
-        
         window.addEventListener('resize', this.onWindowResize.bind(this));
         
         this.animate();
@@ -43,8 +44,8 @@ class ParticleBackground {
     
     createFlowLines() {
         const curve = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-15, -10, 0),
-            new THREE.Vector3(15, 10, 0)
+            new THREE.Vector3(-20, -15, 0),  // Increased spread
+            new THREE.Vector3(20, 15, 0)     // Increased spread
         ]);
 
         for (let i = 0; i < this.lineCount; i++) {
@@ -52,10 +53,10 @@ class ParticleBackground {
             const segments = 8;
             
             for (let j = 0; j <= segments; j++) {
-                const x = (j / segments) * 30 - 15;
-                const y = Math.sin(j / segments * Math.PI * 2) * 5;
-                const z = Math.cos(j / segments * Math.PI * 2) * 3;
-                points.push(new THREE.Vector3(x, y + (Math.random() - 0.5) * 10, z));
+                const x = (j / segments) * 40 - 20;  // Increased range from 30 to 40
+                const y = Math.sin(j / segments * Math.PI * 2) * 8;  // Increased amplitude from 5 to 8
+                const z = Math.cos(j / segments * Math.PI * 2) * 5;  // Increased depth from 3 to 5
+                points.push(new THREE.Vector3(x, y + (Math.random() - 0.5) * 15, z));  // Increased random spread
             }
 
             const flowCurve = new THREE.CatmullRomCurve3(points);
@@ -67,7 +68,7 @@ class ParticleBackground {
                 color: i % 2 === 0 ? this.colors.primary : this.colors.secondary,
                 transparent: true,
                 opacity: 0.8,
-                linewidth: 2
+                linewidth: 2.5  // Increased line thickness
             });
 
             const line = new THREE.Line(geometry, material);
@@ -75,8 +76,8 @@ class ParticleBackground {
             line.userData = {
                 originalPoints: points.map(p => p.clone()),
                 phase: Math.random() * Math.PI * 2,
-                speed: 0.3 + Math.random() * 0.4,    // Increased speed
-                amplitude: 0.3 + Math.random() * 0.4  // Slightly larger amplitude
+                speed: 0.3 + Math.random() * 0.4,
+                amplitude: 0.4 + Math.random() * 0.5  // Increased amplitude
             };
 
             this.flowLines.add(line);
