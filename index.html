@@ -7,177 +7,287 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2D3250;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: #F6B17A;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .loader-icons {
+            font-size: 3rem;
+            height: 3rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .loader-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-icon.active {
+            opacity: 1;
+        }
+
+        .loader-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .loader-subtext {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            margin-top: 1rem;
+            opacity: 1;
+            color: rgba(246, 177, 122, 0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid;
+            width: 0;
+            animation: typing 1s steps(25) forwards 0.8s,
+                      blink 0.7s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Het Suhagiya</div>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
+    <div class="loader-wrapper">
+        <div class="loader-content">
+            <div class="loader-icons">
+                <i class="fas fa-chart-bar loader-icon"></i>
+                <i class="fas fa-chart-line loader-icon"></i>
+                <i class="fas fa-chart-pie loader-icon"></i>
+                <i class="fas fa-chart-area loader-icon"></i>
+                <i class="fas fa-database loader-icon"></i>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="resume.html" target="_blank">Resume <i class="fas fa-file-alt"></i></a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Data Analysis Portfolio</h1>
-            <p>Transforming data into meaningful insights</p>
+            <div class="loader-text">Welcome</div>
+            <div class="loader-subtext">Thanks for visiting my portfolio</div>
         </div>
-    </section>
+    </div>
 
-    <section id="about" class="about">
-        <div class="about-content">
-            <h2>About Me</h2>
-            <div class="about-text">
-                <p>I'm a recent MSc graduate in Data Science and Analytics from Brunel University London. I enjoy working with data, solving problems, and finding useful insights. I have experience with Python, SQL, Tableau, Power BI, and Excel, and I've worked on projects like sales analysis.</p>
-                <p>I like breaking down complex data into something clear and meaningful. Whether it's writing queries, building models, or creating visualizations, I focus on making data useful. I'm looking forward to applying my skills in a role where I can keep learning and make a real impact.</p>
-                
-                <h3>Skills</h3>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4>Data Analysis</h4>
-                        <ul>
-                            <li>SQL</li>
-                            <li>Python</li>
-                            <li>Excel</li>
-                            <li>Data Cleaning</li>
-                            <li>Statistical Analysis</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Visualization</h4>
-                        <ul>
-                            <li>Tableau</li>
-                            <li>Dashboard Design</li>
-                            <li>Data Storytelling</li>
-                            <li>Report Creation</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Tools</h4>
-                        <ul>
-                            <li>MySQL</li>
-                            <li>Microsoft Excel</li>
-                            <li>Tableau</li>
-                            <li>Power BI</li>
-                        </ul>
+    <div class="main-content">
+        <header>
+            <nav>
+                <div class="logo">Het Suhagiya</div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="resume.html" target="_blank">Resume <i class="fas fa-file-alt"></i></a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Data Analysis Portfolio</h1>
+                <p>Transforming data into meaningful insights</p>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <div class="about-text">
+                    <p>I'm a recent MSc graduate in Data Science and Analytics from Brunel University London. I enjoy working with data, solving problems, and finding useful insights. I have experience with Python, SQL, Tableau, Power BI, and Excel, and I've worked on projects like sales analysis.</p>
+                    <p>I like breaking down complex data into something clear and meaningful. Whether it's writing queries, building models, or creating visualizations, I focus on making data useful. I'm looking forward to applying my skills in a role where I can keep learning and make a real impact.</p>
+                    
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Data Analysis</h4>
+                            <ul>
+                                <li>SQL</li>
+                                <li>Python</li>
+                                <li>Excel</li>
+                                <li>Data Cleaning</li>
+                                <li>Statistical Analysis</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Visualization</h4>
+                            <ul>
+                                <li>Tableau</li>
+                                <li>Dashboard Design</li>
+                                <li>Data Storytelling</li>
+                                <li>Report Creation</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Tools</h4>
+                            <ul>
+                                <li>MySQL</li>
+                                <li>Microsoft Excel</li>
+                                <li>Tableau</li>
+                                <li>Power BI</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects" class="projects">
-        <h2>My Projects</h2>
-        <div class="project-grid">
-            <!-- Tableau Project 1 -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3>Sales Performance Dashboard</h3>
-                    <p class="project-summary">
-                        Interactive dashboard analyzing global sales performance, with drill-down capabilities 
-                        for regional analysis, product categories, and time-based trends.
-                    </p>
-                    <div class="project-tools">
-                        <span class="tool">Tableau</span>
-                        <span class="tool">Data Visualization</span>
-                        <span class="tool">Sales Analytics</span>
+        <section id="projects" class="projects">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <!-- Tableau Project 1 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Sales Performance Dashboard</h3>
+                        <p class="project-summary">
+                            Interactive dashboard analyzing global sales performance, with drill-down capabilities 
+                            for regional analysis, product categories, and time-based trends.
+                        </p>
+                        <div class="project-tools">
+                            <span class="tool">Tableau</span>
+                            <span class="tool">Data Visualization</span>
+                            <span class="tool">Sales Analytics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="dashboard1.html" class="project-link" target="_blank">
+                                View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://public.tableau.com/views/Dashboard_17376208048500/Dashboard1" 
+                                class="project-link" target="_blank">
+                                Open in Tableau Public <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="dashboard1.html" class="project-link" target="_blank">
-                            View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
-                        </a>
-                        <a href="https://public.tableau.com/views/Dashboard_17376208048500/Dashboard1" 
-                            class="project-link" target="_blank">
-                            Open in Tableau Public <i class="fas fa-external-link-alt"></i>
-                        </a>
+                </div>
+
+                <!-- Tableau Project 2 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Refunds Overview Dashboard</h3>
+                        <p class="project-summary">
+                            Comprehensive visualization of transaction refunds, analyzing patterns
+                            and trends across different business segments and time periods.
+                        </p>
+                        <div class="project-tools">
+                            <span class="tool">Tableau</span>
+                            <span class="tool">Financial Analysis</span>
+                            <span class="tool">Refund Analytics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="dashboard2.html" class="project-link" target="_blank">
+                                View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://public.tableau.com/views/TransactionDashboard_17428246737940/RefundsOverview" 
+                                class="project-link" target="_blank">
+                                Open in Tableau Public <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL Project -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Sales Analysis Project</h3>
+                        <p class="project-summary">
+                            Comprehensive SQL analysis of sales data across different product categories, 
+                            seasons, and regions. Key findings include product performance analysis, 
+                            seasonal trends, Black Friday sales impact, and regional performance metrics.
+                        </p>
+                        <div class="project-tools">
+                            <span class="tool">SQL</span>
+                            <span class="tool">Data Analysis</span>
+                            <span class="tool">Sales Analytics</span>
+                            <span class="tool">Business Intelligence</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/HetSuhagiya/SQL-Sales-Analysis" 
+                                class="project-link" 
+                                target="_blank">
+                                View Project on GitHub <i class="fab fa-github"></i>
+                            </a>
+                            <a href="pdfviewer.html" 
+                                class="project-link">
+                                View Detailed Report <i class="fas fa-file-pdf"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Tableau Project 2 -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3>Refunds Overview Dashboard</h3>
-                    <p class="project-summary">
-                        Comprehensive visualization of transaction refunds, analyzing patterns
-                        and trends across different business segments and time periods.
-                    </p>
-                    <div class="project-tools">
-                        <span class="tool">Tableau</span>
-                        <span class="tool">Financial Analysis</span>
-                        <span class="tool">Refund Analytics</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="dashboard2.html" class="project-link" target="_blank">
-                            View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
-                        </a>
-                        <a href="https://public.tableau.com/views/TransactionDashboard_17428246737940/RefundsOverview" 
-                            class="project-link" target="_blank">
-                            Open in Tableau Public <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
+        <section id="contact" class="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <a href="mailto:hetsuhagiya1409@outlook.com" class="contact-link">
+                        <p><i class="fas fa-envelope"></i> hetsuhagiya1409@outlook.com</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hetsuhagiya" class="contact-link" target="_blank">
+                        <p><i class="fab fa-linkedin"></i> LinkedIn Profile</p>
+                    </a>
+                    <a href="https://github.com/HetSuhagiya" class="contact-link" target="_blank">
+                        <p><i class="fab fa-github"></i> GitHub Profile</p>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <!-- SQL Project -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3>Sales Analysis Project</h3>
-                    <p class="project-summary">
-                        Comprehensive SQL analysis of sales data across different product categories, 
-                        seasons, and regions. Key findings include product performance analysis, 
-                        seasonal trends, Black Friday sales impact, and regional performance metrics.
-                    </p>
-                    <div class="project-tools">
-                        <span class="tool">SQL</span>
-                        <span class="tool">Data Analysis</span>
-                        <span class="tool">Sales Analytics</span>
-                        <span class="tool">Business Intelligence</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/HetSuhagiya/SQL-Sales-Analysis" 
-                            class="project-link" 
-                            target="_blank">
-                            View Project on GitHub <i class="fab fa-github"></i>
-                        </a>
-                        <a href="pdfviewer.html" 
-                            class="project-link">
-                            View Detailed Report <i class="fas fa-file-pdf"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <a href="mailto:hetsuhagiya1409@outlook.com" class="contact-link">
-                    <p><i class="fas fa-envelope"></i> hetsuhagiya1409@outlook.com</p>
-                </a>
-                <a href="https://www.linkedin.com/in/hetsuhagiya" class="contact-link" target="_blank">
-                    <p><i class="fab fa-linkedin"></i> LinkedIn Profile</p>
-                </a>
-                <a href="https://github.com/HetSuhagiya" class="contact-link" target="_blank">
-                    <p><i class="fab fa-github"></i> GitHub Profile</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Het Suhagiya. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2024 Het Suhagiya. All rights reserved.</p>
+        </footer>
+    </div>
 
     <script src="js/main.js"></script>
 
@@ -218,11 +328,34 @@
         vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
     </script>
 
-    <!-- Add this before closing body tag -->
-    <script src="js/background.js"></script>
+    <!-- Add simple fade transition -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            new ParticleBackground();
+            const mainContent = document.querySelector('.main-content');
+            const loaderWrapper = document.querySelector('.loader-wrapper');
+            const icons = document.querySelectorAll('.loader-icon');
+            let currentIcon = 0;
+            
+            // Function to cycle through icons
+            function cycleIcons() {
+                icons.forEach(icon => icon.classList.remove('active'));
+                icons[currentIcon].classList.add('active');
+                currentIcon = (currentIcon + 1) % icons.length;
+            }
+
+            // Start icon animation
+            cycleIcons();
+            const iconInterval = setInterval(cycleIcons, 400);
+            
+            setTimeout(() => {
+                clearInterval(iconInterval);
+                loaderWrapper.style.opacity = '0';
+                mainContent.classList.add('visible');
+                
+                setTimeout(() => {
+                    loaderWrapper.style.display = 'none';
+                }, 1000);
+            }, 3000);
         });
     </script>
 </body>
