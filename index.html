@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Het Suhagiya</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Data Analysis Portfolio</h1>
+            <p>Transforming data into meaningful insights</p>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <!-- Tableau Project 1 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Sales Performance Dashboard</h3>
+                    <p class="project-summary">
+                        Interactive dashboard analyzing global sales performance, with drill-down capabilities 
+                        for regional analysis, product categories, and time-based trends.
+                    </p>
+                    <div class="project-tools">
+                        <span class="tool">Tableau</span>
+                        <span class="tool">Data Visualization</span>
+                        <span class="tool">Sales Analytics</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="dashboard1.html" class="project-link" target="_blank">
+                            View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://public.tableau.com/views/Dashboard_17376208048500/Dashboard1" 
+                           class="project-link" target="_blank">
+                            Open in Tableau Public <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau Project 2 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Refunds Overview Dashboard</h3>
+                    <p class="project-summary">
+                        Comprehensive visualization of transaction refunds, analyzing patterns
+                        and trends across different business segments and time periods.
+                    </p>
+                    <div class="project-tools">
+                        <span class="tool">Tableau</span>
+                        <span class="tool">Financial Analysis</span>
+                        <span class="tool">Refund Analytics</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="dashboard2.html" class="project-link" target="_blank">
+                            View Interactive Dashboard <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://public.tableau.com/views/TransactionDashboard_17428246737940/RefundsOverview" 
+                           class="project-link" target="_blank">
+                            Open in Tableau Public <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SQL Project -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Sales Analysis Project</h3>
+                    <p class="project-summary">
+                        Comprehensive SQL analysis of sales data across different product categories, 
+                        seasons, and regions. Key findings include product performance analysis, 
+                        seasonal trends, Black Friday sales impact, and regional performance metrics.
+                    </p>
+                    <div class="project-tools">
+                        <span class="tool">SQL</span>
+                        <span class="tool">Data Analysis</span>
+                        <span class="tool">Sales Analytics</span>
+                        <span class="tool">Business Intelligence</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/HetSuhagiya/SQL-Sales-Analysis" 
+                           class="project-link" 
+                           target="_blank">
+                            View Project on GitHub <i class="fab fa-github"></i>
+                        </a>
+                        <a href="pdfviewer.html" 
+                           class="project-link">
+                            View Detailed Report <i class="fas fa-file-pdf"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a href="mailto:hetsuhagiya1409@outlook.com" class="contact-link">
+                    <p><i class="fas fa-envelope"></i> hetsuhagiya1409@outlook.com</p>
+                </a>
+                <a href="https://www.linkedin.com/in/hetsuhagiya" class="contact-link" target="_blank">
+                    <p><i class="fab fa-linkedin"></i> LinkedIn Profile</p>
+                </a>
+                <a href="https://github.com/HetSuhagiya" class="contact-link" target="_blank">
+                    <p><i class="fab fa-github"></i> GitHub Profile</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Het Suhagiya. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+
+    <!-- Tableau Embed Scripts -->
+    <script type='text/javascript'>
+        // Dashboard 1
+        var divElement = document.getElementById('viz1742905327362');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 800) {
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else if (divElement.offsetWidth > 500) {
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else {
+            vizElement.style.width='100%';
+            vizElement.style.height='1677px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+
+        // Dashboard 2
+        var divElement2 = document.getElementById('viz1742905367057');
+        var vizElement2 = divElement2.getElementsByTagName('object')[0];
+        if (divElement2.offsetWidth > 800) {
+            vizElement2.style.width='100%';
+            vizElement2.style.height=(divElement2.offsetWidth*0.75)+'px';
+        } else if (divElement2.offsetWidth > 500) {
+            vizElement2.style.width='100%';
+            vizElement2.style.height=(divElement2.offsetWidth*0.75)+'px';
+        } else {
+            vizElement2.style.width='100%';
+            vizElement2.style.height='927px';
+        }
+        var scriptElement2 = document.createElement('script');
+        scriptElement2.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
+    </script>
+
+    <!-- Add this before closing body tag -->
+    <script src="js/background.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new ParticleBackground();
+        });
+    </script>
+</body>
+</html> 
