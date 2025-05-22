@@ -18,9 +18,9 @@ function getCurrentSection() {
 function updateActiveLink() {
     const currentSection = getCurrentSection();
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
+        link.classList.remove('active-nav');
         if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
+            link.classList.add('active-nav');
         }
     });
 }
@@ -35,9 +35,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         // Update active state immediately
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.classList.remove('active');
+            link.classList.remove('active-nav');
         });
-        this.classList.add('active');
+        this.classList.add('active-nav');
     });
 });
 

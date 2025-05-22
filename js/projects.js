@@ -5,24 +5,7 @@ class ProjectLoader {
     }
 
     async loadProjects() {
-        try {
-            const response = await fetch('/api/projects');
-            if (!response.ok) {
-                throw new Error('Failed to load projects');
-            }
-            const data = await response.json();
-            
-            if (data.projects && data.projects.length > 0) {
-                this.projectGrid.innerHTML = data.projects
-                    .map(project => this.generateProjectCard(project))
-                    .join('');
-            } else {
-                this.showDefaultProjects();
-            }
-        } catch (error) {
-            console.error('Error loading projects:', error);
-            this.showDefaultProjects();
-        }
+        this.showDefaultProjects();
     }
 
     showDefaultProjects() {
@@ -45,6 +28,52 @@ class ProjectLoader {
                     }
                 ]
             },
+            {
+                title: "Refunds Overview Dashboard",
+                summary: "Comprehensive visualization of transaction refunds, analyzing patterns and trends across different business segments and time periods.",
+                tools: ["Tableau", "Financial Analysis", "Refund Analytics"],
+                links: [
+                    {
+                        url: "dashboard2.html",
+                        text: "View Interactive Dashboard",
+                        icon: "external-link-alt"
+                    },
+                    {
+                        url: "https://public.tableau.com/views/TransactionDashboard_17428246737940/RefundsOverview",
+                        text: "Open in Tableau Public",
+                        icon: "external-link-alt"
+                    }
+                ]
+            },
+            {
+                title: "Sales Analysis Project",
+                summary: "Comprehensive SQL analysis of sales data across different product categories, seasons, and regions. Key findings include product performance analysis, seasonal trends, Black Friday sales impact, and regional performance metrics.",
+                tools: ["SQL", "Data Analysis", "Sales Analytics", "Business Intelligence"],
+                links: [
+                    {
+                        url: "https://github.com/HetSuhagiya/SQL-Sales-Analysis",
+                        text: "View Project on GitHub",
+                        icon: "fab fa-github"
+                    },
+                    {
+                        url: "pdfviewer.html",
+                        text: "View Detailed Report",
+                        icon: "fas fa-file-pdf"
+                    }
+                ]
+            },
+            {
+                title: "Data Pipeline: Kaggle API to PostgreSQL",
+                summary: "Built an automated ETL pipeline to reduce manual overhead and support structured analysis of external datasets. Cleaned and transformed over 100,000 rows using Python (Pandas), supporting data quality and time-series insight generation. Loaded processed data into PostgreSQL to enable repeatable analysis and reporting for internal tools.",
+                tools: ["Python", "Pandas", "Kaggle API", "PostgreSQL", "ETL"],
+                links: [
+                    {
+                        url: "https://github.com/HetSuhagiya/ETL.git",
+                        text: "View on GitHub",
+                        icon: "fab fa-github"
+                    }
+                ]
+            }
             // Add other default projects here
         ];
 
@@ -55,7 +84,7 @@ class ProjectLoader {
 
     generateProjectCard(project) {
         return `
-            <div class="project-card">
+            <div class="project-card fade-in">
                 <div class="project-content">
                     <h3>${project.title}</h3>
                     <p class="project-summary">${project.summary}</p>
@@ -69,7 +98,7 @@ class ProjectLoader {
                             <a href="${link.url}" 
                                class="project-link"
                                ${link.url.startsWith('http') ? 'target="_blank"' : ''}>
-                                ${link.text} <i class="fas fa-${link.icon}"></i>
+                                ${link.text} <i class="${link.icon.includes('fab') ? link.icon : 'fas fa-' + link.icon}"></i>
                             </a>
                         `).join('')}
                     </div>
@@ -77,4 +106,9 @@ class ProjectLoader {
             </div>
         `;
     }
-} 
+}
+
+// Initialize the ProjectLoader when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ProjectLoader();
+}); 
