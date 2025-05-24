@@ -1,146 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analysis Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        .main-content {
-            opacity: 1; /* Make main content visible by default */
-            transition: opacity 1s ease-in;
-        }
-
-        .nav-links li a.active-nav {
-            background-color: var(--highlight-color); /* Orange/yellowish background for active link */
-            color: #FFD700; /* Bright yellow/gold text color for active link */
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-    <div class="main-content">
-        <header>
-            <nav>
-                <div class="logo">Het Suhagiya</div>
-                <div class="menu-toggle" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="resume.html" target="_blank">Resume <i class="fas fa-file-alt"></i></a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section id="home" class="hero">
-            <div class="hero-content fade-in">
-                <h1>Data Analysis Portfolio</h1>
-                <p>Transforming data into meaningful insights</p>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="about-content">
-                <h2 class="fade-in">About Me</h2>
-                <div class="about-text fade-in">
-                    <p>I'm a recent MSc graduate in Data Science and Analytics from Brunel University London. I enjoy working with data, solving problems, and finding useful insights. I have experience with Python, SQL, Tableau, Power BI, and Excel, and I've worked on projects like sales analysis.</p>
-                    <p>I like breaking down complex data into something clear and meaningful. Whether it's writing queries, building models, or creating visualizations, I focus on making data useful. I'm looking forward to applying my skills in a role where I can keep learning and make a real impact.</p>
-                    
-                    <h3>Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category fade-in">
-                            <h4>Data Analysis</h4>
-                            <ul>
-                                <li>SQL</li>
-                                <li>Python</li>
-                                <li>Excel</li>
-                                <li>Data Cleaning</li>
-                                <li>Statistical Analysis</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category fade-in">
-                            <h4>Visualization</h4>
-                            <ul>
-                                <li>Tableau</li>
-                                <li>Dashboard Design</li>
-                                <li>Data Storytelling</li>
-                                <li>Report Creation</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category fade-in">
-                            <h4>Tools</h4>
-                            <ul>
-                                <li>MySQL</li>
-                                <li>Microsoft Excel</li>
-                                <li>Tableau</li>
-                                <li>Power BI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects">
-            <h2 class="fade-in">My Projects</h2>
-            <div class="project-grid">
-                <!-- Projects will be loaded dynamically by projects.js -->
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2 class="fade-in">Contact Me</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <a href="mailto:hetsuhagiya1409@outlook.com" class="contact-link fade-in">
-                        <i class="fas fa-envelope"></i>
-                        <p>hetsuhagiya1409@outlook.com</p>
-                    </a>
-                    <a href="https://www.linkedin.com/in/hetsuhagiya" class="contact-link fade-in" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                        <p>LinkedIn Profile</p>
-                    </a>
-                    <a href="https://github.com/HetSuhagiya" class="contact-link fade-in" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <p>GitHub Profile</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2025 Het Suhagiya. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script src="js/main.js"></script>
-    <script src="js/projects.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fade-in animation on scroll
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
-</body>
-</html> 
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Het Suhagiya - Data Analyst & Visualization Specialist Portfolio" />
+    <meta name="keywords" content="data analysis, data visualization, tableau, sql, python, portfolio" />
+    <meta name="author" content="Het Suhagiya" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Het Suhagiya - Data Analyst Portfolio" />
+    <meta property="og:description" content="Data Analyst & Visualization Specialist Portfolio showcasing projects and skills" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hetsuhagiya.com" />
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <title>Het Suhagiya - Data Analyst Portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
