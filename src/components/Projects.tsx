@@ -8,14 +8,14 @@ const projects = [
     tools: ['Tableau', 'SQL', 'Data Analysis'],
     link: 'https://public.tableau.com/app/profile/hetsuhagiya/viz/Dashboard_17376208048500/Dashboard1',
     github: 'https://github.com/HetSuhagiya/SQL-Sales-Analysis.git',
-    icon: '/Assets/Proj_icons/sales_analysis.png'
+    icon: '/Public/Proj_icons/sales_analysis.png'
   },
   {
     title: 'Refund Analysis',
     summary: 'Developed an interactive dashboard to analyse refund patterns, track transaction metrics, and identify key factors affecting customer returns.',
     tools: ['Tableau', 'SQL', 'Data Analysis'],
     link: 'https://public.tableau.com/app/profile/hetsuhagiya/viz/TransactionDashboard_17428246737940/RefundsOverview',
-    icon: '/Assets/Proj_icons/finance_analysis.png'
+    icon: '/Public/Proj_icons/finance_analysis.png'
   },
   {
     title: 'Data Pipeline: Kaggle API to PostgreSQL',
@@ -23,7 +23,7 @@ const projects = [
     tools: ['Python', 'Pandas', 'Kaggle API', 'PostgreSQL'],
     link: 'https://github.com/hetsuhagiya/etl-pipeline',
     github: 'https://github.com/HetSuhagiya/ETL.git',
-    icon: '/Assets/Proj_icons/ETL.png'
+    icon: '/Public/Proj_icons/ETL.png'
   },
   {
     title: 'Medical Health Application',
@@ -31,7 +31,7 @@ const projects = [
     tools: ['Django', 'Plotly Dash', 'Google Fit API', 'Python', 'GPT-based Models'],
     link: 'https://github.com/GHMProjects/Health-Dashboard',
     github: 'https://github.com/GHMProjects/Health-Dashboard',
-    icon: '/Assets/Proj_icons/health_analysis.png'
+    icon: '/Public/Proj_icons/health_analysis.png'
   }
 ]
 
