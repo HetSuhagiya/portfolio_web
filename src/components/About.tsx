@@ -50,7 +50,7 @@ export default function About() {
                   playsInline
                   className="w-full h-full object-cover"
                 >
-                  <source src="/Public/profile.mp4" type="video/mp4" />
+                  <source src="/profile.mp4" type="video/mp4" />
                 </video>
               </div>
             </motion.div>

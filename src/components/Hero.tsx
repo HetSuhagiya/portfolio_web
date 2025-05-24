@@ -23,7 +23,7 @@ export default function Hero() {
             className="flex-1 text-center md:text-left"
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Hi, I'm <span className="text-primary-500">Het Suhagiya</span>
+              Hi, I'm <span className="text-primary-500">Het</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Data Analyst
@@ -38,7 +38,7 @@ export default function Hero() {
                 Get in Touch
               </motion.a>
               <motion.a
-                href="/Public/resume.pdf"
+                href="/resume.pdf"
                 download
                 className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.05 }}
