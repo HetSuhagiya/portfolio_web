@@ -13,9 +13,9 @@ import Footer from './components/Footer'
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
-  const { ref: scrollTopRef, inView } = useInView({
-    threshold: 0.1,
-  })
+  // const { ref: scrollTopRef, inView } = useInView({
+  //   threshold: 0.1,
+  // })
 
   useEffect(() => {
     const handleScroll = () => {

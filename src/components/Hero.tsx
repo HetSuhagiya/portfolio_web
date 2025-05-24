@@ -3,10 +3,10 @@ import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  })
+  // const [ref, inView] = useInView({
+  //   threshold: 0.1,
+  //   triggerOnce: true
+  // })
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
