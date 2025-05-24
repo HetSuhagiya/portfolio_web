@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import { useInView } from 'react-intersection-observer'
+// import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
   // const [ref, inView] = useInView({
