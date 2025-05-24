@@ -60,7 +60,7 @@ export default function Hero() {
             className="flex-1 flex justify-center"
           >
             <motion.img
-              src="/Public/Home.png"
+              src="/Home.png"
               alt="Data Analysis Illustration"
               className="w-full max-w-lg object-contain"
               animate={{
