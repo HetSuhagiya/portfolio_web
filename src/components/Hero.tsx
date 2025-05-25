@@ -3,6 +3,8 @@ import { ArrowDownIcon } from '@heroicons/react/24/solid'
 // import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
+  const letters = "Het".split("")
+
   // const [ref, inView] = useInView({
   //   threshold: 0.1,
   //   triggerOnce: true
@@ -22,16 +24,33 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex-1 text-center md:text-left"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Hi, I'm <span className="text-primary-500">Het</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-gray-200 mb-6">
+              Hi, I'm{' '}
+              <span className="text-indigo-500 font-handwriting inline-flex">
+                {letters.map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: index * 0.2,
+                      type: "spring",
+                      stiffness: 200
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </span>
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
               Data Analyst
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <motion.a
                 href="#contact"
-                className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors duration-200"
+                className="inline-flex items-center px-6 py-3 rounded-lg bg-indigo-700 dark:bg-indigo-300 text-neutral-100 dark:text-neutral-900 hover:bg-indigo-800 dark:hover:bg-indigo-400 transition-colors duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -40,7 +59,7 @@ export default function Hero() {
               <motion.a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
+                className="btn-outline px-6 py-3 rounded-lg"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -83,7 +102,7 @@ export default function Hero() {
       >
         <motion.a
           href="#about"
-          className="text-primary-400 hover:text-primary-600 dark:hover:text-primary-300 transition-colors duration-200"
+          className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
           whileHover={{ y: 5 }}
         >
           <ArrowDownIcon className="w-8 h-8" />

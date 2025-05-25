@@ -40,7 +40,7 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-12">
             Get in Touch
           </h2>
 
@@ -52,7 +52,7 @@ export default function Contact() {
           >
             <motion.a
               href="mailto:hetsuhagiya1409@outlook.com"
-              className="inline-flex items-center text-lg text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+              className="inline-flex items-center text-lg text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -67,7 +67,7 @@ export default function Contact() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={link.name}
@@ -81,7 +81,7 @@ export default function Contact() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-gray-500 dark:text-gray-400 mt-8"
+              className="text-gray-600 dark:text-gray-400 mt-8"
             >
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </motion.p>

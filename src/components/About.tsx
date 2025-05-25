@@ -4,15 +4,15 @@ import { useInView } from 'react-intersection-observer'
 const skills = [
   {
     category: 'Data Analysis',
-    items: ['SQL', 'Python', 'Excel', 'Data Cleaning', 'Statistical Analysis']
+    items: ['SQL', 'Python', 'Excel', 'Data Cleaning', 'Statistical Analysis', 'ML Methods (Working Knowledge)']
   },
   {
     category: 'Visualisation',
-    items: ['Tableau', 'Dashboard Design', 'Data Storytelling', 'Report Creation']
+    items: ['Tableau', 'Power BI', 'Dashboard Design', 'Data Storytelling', 'Report Creation']
   },
   {
     category: 'Tools',
-    items: ['MySQL', 'Microsoft Excel', 'Tableau', 'Power BI']
+    items: ['MySQL', 'Microsoft Excel', 'Tableau', 'Power BI', 'Git']
   }
 ]
 
@@ -32,7 +32,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 text-center mb-12">
             About Me
           </h2>
           <div className="flex flex-col md:flex-row gap-8 items-center mb-12">
@@ -60,12 +60,12 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex-grow"
             >
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
                 I'm a recent MSc graduate in Data Science and Analytics from Brunel University London. 
                 I enjoy working with data, solving problems, and finding useful insights. 
                 I have experience with Python, SQL, Tableau, Power BI, and Excel, and I've worked on projects like sales analysis.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-lg text-gray-600 dark:text-gray-400">
                 I like breaking down complex data into something clear and meaningful. 
                 Whether it's writing queries, building models, or creating visualisations, 
                 I focus on making data useful. I'm looking forward to applying my skills 
@@ -85,18 +85,18 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 * (index + 3) }}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm"
+                className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 shadow-sm"
               >
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
                   {skillGroup.category}
                 </h3>
                 <ul className="space-y-2">
                   {skillGroup.items.map((skill) => (
                     <li
                       key={skill}
-                      className="text-gray-600 dark:text-gray-300 flex items-center"
+                      className="text-gray-600 dark:text-gray-400 flex items-center"
                     >
-                      <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
                       {skill}
                     </li>
                   ))}

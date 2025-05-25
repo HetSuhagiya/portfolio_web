@@ -63,7 +63,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <motion.a
             href="#home"
-            className="text-xl font-bold text-gray-900 dark:text-white"
+            className="text-gray-800 dark:text-gray-200 text-xl font-bold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -79,8 +79,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.href.substring(1)
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                      ? 'text-indigo-600 dark:text-indigo-400'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -105,7 +105,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-primary-400 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
             >
               {isOpen ? (
                 <XMarkIcon className="block h-6 w-6" />
@@ -119,7 +119,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-6">
               <motion.button
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -141,7 +141,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-900"
+            className="md:hidden bg-neutral-800"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
@@ -150,8 +150,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                     activeSection === item.href.substring(1)
-                      ? 'text-primary-400 bg-gray-800'
-                      : 'text-gray-300 hover:text-primary-400'
+                      ? 'text-indigo-400 bg-neutral-700'
+                      : 'text-gray-400 hover:text-gray-300'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
