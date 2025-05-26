@@ -259,17 +259,17 @@ export default function Projects() {
                     </div>
                     <div className="flex gap-2">
                       {project.type === 'tableau' && (
-                        <motion.a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                      <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                           className="p-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                           onClick={(e) => e.stopPropagation()}
-                        >
+                      >
                           <img src="/tableau.svg" alt="Tableau" className="w-5 h-5" />
-                        </motion.a>
+                      </motion.a>
                       )}
                       {project.github && (
                         <motion.a
