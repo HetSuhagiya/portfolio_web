@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
 
-const API_URL = 'http://localhost:3001'
-
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
@@ -22,7 +20,7 @@ export default function Admin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${API_URL}/api/admin/login`, {
+      const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
