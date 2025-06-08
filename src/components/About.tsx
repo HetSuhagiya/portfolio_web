@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import ScrollFloat from './ScrollFloat'
 
 const skills = [
   {
@@ -32,9 +33,16 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 text-center mb-12">
+          <ScrollFloat
+            animationDuration={1}
+            ease='back.inOut(2)'
+            scrollStart='center bottom+=50%'
+            scrollEnd='bottom bottom-=40%'
+            stagger={0.03}
+            scrollContainerRef={window}
+          >
             About Me
-          </h2>
+          </ScrollFloat>
           <div className="flex flex-col md:flex-row gap-8 items-center mb-12">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import ScrollFloat from './ScrollFloat'
 
 const projects = [
   {
@@ -235,9 +236,16 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+          <ScrollFloat
+            animationDuration={1}
+            ease='back.inOut(2)'
+            scrollStart='center bottom+=50%'
+            scrollEnd='bottom bottom-=40%'
+            stagger={0.03}
+            scrollContainerRef={window}
+          >
             Projects
-          </h2>
+          </ScrollFloat>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div

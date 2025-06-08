@@ -11,6 +11,7 @@ import Projects from './Projects'
 import Contact from './Contact'
 import Footer from './Footer'
 import Admin from '../routes/admin'
+import Timeline from './Timeline'
 
 const API_URL = 'http://localhost:3001'
 
@@ -120,6 +121,7 @@ function AppContent() {
             <>
               <Hero />
               <About />
+              <Timeline />
               <Projects />
               <Contact />
             </>

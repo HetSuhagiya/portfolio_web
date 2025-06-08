@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
+import ScrollFloat from './ScrollFloat'
 // import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
@@ -24,26 +25,33 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex-1 text-center md:text-left"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-gray-200 mb-6">
-              Hi, I'm{' '}
-              <span className="text-indigo-500 font-handwriting inline-flex">
-                {letters.map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: index * 0.2,
-                      type: "spring",
-                      stiffness: 200
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
-            </h1>
+            <ScrollFloat
+              animationDuration={1}
+              ease='back.inOut(2)'
+              scrollStart='center bottom+=50%'
+              scrollEnd='bottom bottom-=40%'
+              stagger={0.03}
+              scrollContainerRef={window}
+            >
+              Hi, I'm
+            </ScrollFloat>
+            <span className="text-indigo-500 font-handwriting inline-flex text-4xl sm:text-5xl lg:text-6xl">
+              {letters.map((letter, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: index * 0.2,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </span>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
               Data Analyst
             </p>

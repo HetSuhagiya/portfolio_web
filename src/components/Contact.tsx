@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
+import ScrollFloat from './ScrollFloat'
 
 const socialLinks = [
   {
@@ -40,9 +41,16 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-12">
+          <ScrollFloat
+            animationDuration={1}
+            ease='back.inOut(2)'
+            scrollStart='center bottom+=50%'
+            scrollEnd='bottom bottom-=40%'
+            stagger={0.03}
+            scrollContainerRef={window}
+          >
             Get in Touch
-          </h2>
+          </ScrollFloat>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
