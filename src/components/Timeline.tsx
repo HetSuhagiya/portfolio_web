@@ -3,7 +3,6 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect, useState, useRef } from 'react'
 
 // Components
-import ScrollFloat from './ScrollFloat'
 import TrueFocus from './TrueFocus'
 
 interface Milestone {

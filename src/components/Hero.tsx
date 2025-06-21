@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import ScrollFloat from './ScrollFloat'
-import TrueFocus from "./TrueFocus"
+//import ScrollFloat from './ScrollFloat'
+//import TrueFocus from "./TrueFocus"
 // import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {

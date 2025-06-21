@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
-import ScrollFloat from './ScrollFloat'
 import TrueFocus from "./TrueFocus"
 
 const socialLinks = [
