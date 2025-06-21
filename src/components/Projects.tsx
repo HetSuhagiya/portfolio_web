@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollFloat from './ScrollFloat'
+import TrueFocus from "./TrueFocus";
 
 const projects = [
   {
@@ -50,7 +51,6 @@ const projects = [
 
 • Predictive Analytics:
   - Identification of high-risk transactions
-  - Early warning system for potential returns
   - Customer behavior prediction
 
 • Actionable Insights:
@@ -83,7 +83,6 @@ const projects = [
   - Automated backup and recovery
 
 • Pipeline Features:
-  - Error handling and logging system
   - Data validation at each stage
   - Performance monitoring and optimization
   - Automated testing and maintenance`,
@@ -229,6 +228,16 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 flex flex-col items-center">
+          <TrueFocus
+            sentence="My Projects"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="#6366f1"
+            animationDuration={2}
+            pauseBetweenAnimations={1}
+          />
+        </div>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -236,16 +245,6 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="max-w-6xl mx-auto"
         >
-          <ScrollFloat
-            animationDuration={1}
-            ease='back.inOut(2)'
-            scrollStart='center bottom+=50%'
-            scrollEnd='bottom bottom-=40%'
-            stagger={0.03}
-            scrollContainerRef={window}
-          >
-            Projects
-          </ScrollFloat>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div

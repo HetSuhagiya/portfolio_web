@@ -1,90 +1,46 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useEffect, type ReactNode } from 'react'
 
+interface ScrollFloatProps {
+  children: ReactNode
+  animationDuration?: number
+  stagger?: number
+}
 
-import './ScrollFloat.css';
-
-
-gsap.registerPlugin(ScrollTrigger);
-
-
-const ScrollFloat = ({
+export default function ScrollFloat({
   children,
-  scrollContainerRef,
-  containerClassName = "",
-  textClassName = "",
   animationDuration = 1,
-  ease = 'back.inOut(2)',
-  scrollStart = 'center bottom+=50%',
-  scrollEnd = 'bottom bottom-=40%',
-  stagger = 0.03
-}) => {
-  const containerRef = useRef(null);
+  stagger = 0
+}: ScrollFloatProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start']
+  })
 
-
-  const splitText = useMemo(() => {
-    const text = typeof children === 'string' ? children : '';
-    return text.split("").map((char, index) => (
-      <span className="char" key={index}>
-        {char === " " ? "\u00A0" : char}
-      </span>
-    ));
-  }, [children]);
-
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-
-    const scroller =
-      scrollContainerRef && scrollContainerRef.current
-        ? scrollContainerRef.current
-        : window;
-
-
-    const charElements = el.querySelectorAll('.char');
-
-
-    gsap.fromTo(
-      charElements,
-      {
-        willChange: 'opacity, transform',
-        opacity: 0,
-        yPercent: 120,
-        scaleY: 2.3,
-        scaleX: 0.7,
-        transformOrigin: '50% 0%'
-      },
-      {
-        duration: animationDuration,
-        ease: ease,
-        opacity: 1,
-        yPercent: 0,
-        scaleY: 1,
-        scaleX: 1,
-        stagger: stagger,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: scrollStart,
-          end: scrollEnd,
-          scrub: true
-        }
+    if (!ref.current) return
+    const elements = ref.current.querySelectorAll('*')
+    elements.forEach((element, index) => {
+      if (element instanceof HTMLElement) {
+        element.style.transitionDelay = `${index * stagger}s`
       }
-    );
-  }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger]);
-
+    })
+  }, [stagger])
 
   return (
-    <h2 ref={containerRef} className={`scroll-float ${containerClassName}`}>
-      <span className={`scroll-float-text ${textClassName}`}>
-        {splitText}
-      </span>
-    </h2>
-  );
-};
-
-
-export default ScrollFloat; 
+    <motion.div
+      ref={ref}
+      style={{
+        y,
+        opacity,
+        transition: `all ${animationDuration}s`
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+} 

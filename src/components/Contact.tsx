@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
 import ScrollFloat from './ScrollFloat'
+import TrueFocus from "./TrueFocus"
 
 const socialLinks = [
   {
@@ -34,6 +35,16 @@ export default function Contact() {
     <section id="contact" className="min-h-screen py-20 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="mb-12 flex flex-col items-center">
+          <TrueFocus
+            sentence="Get in Touch"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="#6366f1"
+            animationDuration={2}
+            pauseBetweenAnimations={1}
+          />
+        </div>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -41,17 +52,6 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <ScrollFloat
-            animationDuration={1}
-            ease='back.inOut(2)'
-            scrollStart='center bottom+=50%'
-            scrollEnd='bottom bottom-=40%'
-            stagger={0.03}
-            scrollContainerRef={window}
-          >
-            Get in Touch
-          </ScrollFloat>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}

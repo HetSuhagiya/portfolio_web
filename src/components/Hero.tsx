@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import ScrollFloat from './ScrollFloat'
+import TrueFocus from "./TrueFocus"
 // import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
@@ -25,16 +26,12 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex-1 text-center md:text-left"
           >
-            <ScrollFloat
+            {/* <ScrollFloat
               animationDuration={1}
-              ease='back.inOut(2)'
-              scrollStart='center bottom+=50%'
-              scrollEnd='bottom bottom-=40%'
               stagger={0.03}
-              scrollContainerRef={window}
             >
-              Hi, I'm
-            </ScrollFloat>
+              Data Analyst & Visualization Specialist
+            </ScrollFloat> */}
             <span className="text-indigo-500 font-handwriting inline-flex text-4xl sm:text-5xl lg:text-6xl">
               {letters.map((letter, index) => (
                 <motion.span

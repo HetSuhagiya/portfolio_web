@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = import.meta.env.VITE_JWT_SECRET
 
 export function signToken() {
   if (!JWT_SECRET) {
@@ -14,8 +14,8 @@ export function verifyToken(token: string) {
     return false
   }
   try {
-    const decoded = jwt.verify(token, JWT_SECRET)
-    return decoded && (decoded as any).role === 'admin'
+    const decoded = jwt.verify(token, JWT_SECRET) as { role?: string };
+    return decoded && decoded.role === 'admin'
   } catch (error) {
     return false
   }

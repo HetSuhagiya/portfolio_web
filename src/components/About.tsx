@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollFloat from './ScrollFloat'
+import TrueFocus from "./TrueFocus";
 
 const skills = [
   {
@@ -26,6 +27,16 @@ export default function About() {
   return (
     <section id="about" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 flex flex-col items-center">
+          <TrueFocus
+            sentence="About Me"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="#6366f1"
+            animationDuration={2}
+            pauseBetweenAnimations={1}
+          />
+        </div>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -33,16 +44,6 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <ScrollFloat
-            animationDuration={1}
-            ease='back.inOut(2)'
-            scrollStart='center bottom+=50%'
-            scrollEnd='bottom bottom-=40%'
-            stagger={0.03}
-            scrollContainerRef={window}
-          >
-            About Me
-          </ScrollFloat>
           <div className="flex flex-col md:flex-row gap-8 items-center mb-12">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}

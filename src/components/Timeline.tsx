@@ -1,98 +1,53 @@
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState, useRef } from 'react'
 
 // Components
 import ScrollFloat from './ScrollFloat'
+import TrueFocus from './TrueFocus'
 
 interface Milestone {
   title: string
   description: string
-}
-
-interface TimelineItem {
   date: string
-  title: string
-  description: string
-  category: 'academic' | 'professional' | 'project'
-  milestones?: Milestone[]
 }
 
-const timelineData: TimelineItem[] = [
+const timelineData: Milestone[] = [
   {
     date: '2023 - Present',
-    title: 'Software Engineer',
-    description: 'Working on full-stack development using React, Node.js, and TypeScript.',
-    category: 'professional',
+    title: 'MSc Data Science and Analytics',
+    description: 'Graduated from Brunel University London with a focus on data analysis, machine learning, and statistical methods.'
   },
   {
-    date: '2019 - 2023',
-    title: 'BSc in Information Technology',
-    description: 'Studied computer science fundamentals, databases, and software engineering.',
-    category: 'academic',
+    date: '2022 - 2023',
+    title: 'Data Analysis Projects',
+    description: 'Developed comprehensive sales analysis dashboards using Tableau and SQL, focusing on product performance and regional insights.'
   },
   {
-    date: '2023 - 2024',
-    title: 'MSc in Data Science and Analytics',
-    description: 'Focused on data analytics, machine learning, and statistical modeling.',
-    category: 'academic',
-  },
-  {
-    date: '2023',
-    title: 'Used Car Price Scraper',
-    description: 'Built a full-stack web scraper with analytics dashboard to analyse price trends.',
-    category: 'project',
-  },
-  {
-    date: '2023',
-    title: 'Health Insurance Analytics',
-    description: 'Conducted risk prediction and pricing analysis using Python and SQL.',
-    category: 'project',
-  },
-  {
-    date: '2024',
-    title: 'Financial Risk Analysis',
-    description: 'Created a multi-table SQL model to assess customer risk and transaction behavior.',
-    category: 'project',
-  },
+    date: '2021 - 2022',
+    title: 'Data Visualization Training',
+    description: 'Mastered data visualization tools including Tableau and Power BI, creating interactive dashboards and reports.'
+  }
 ]
 
 const Timeline = () => {
-  const lineRef = useRef<HTMLDivElement>(null)
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  })
+
   const timelineContainerRef = useRef<HTMLDivElement>(null)
-  const controls = useAnimation()
+  const lineRef = useRef<HTMLDivElement>(null)
   const [fillHeight, setFillHeight] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!timelineContainerRef.current) return
-
-      const container = timelineContainerRef.current
-      const containerTop = container.getBoundingClientRect().top
-      const containerHeight = container.offsetHeight
-      const windowHeight = window.innerHeight
-
-      const distanceScrolled = windowHeight - containerTop
-      const totalScrollable = containerHeight
-
-      const scrollProgress = Math.min(1, Math.max(0, distanceScrolled / totalScrollable))
-      const calculatedFillHeight = scrollProgress * containerHeight
-
-      setFillHeight(Math.min(containerHeight, Math.max(0, calculatedFillHeight)))
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   const containerVariants = {
-    hidden: {},
+    hidden: { opacity: 0 },
     visible: {
+      opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-      },
-    },
+        staggerChildren: 0.2
+      }
+    }
   }
 
   const itemVariants = {
@@ -101,23 +56,32 @@ const Timeline = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-      },
-    },
-  }
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'academic':
-        return 'bg-blue-500'
-      case 'professional':
-        return 'bg-green-500'
-      case 'project':
-        return 'bg-purple-500'
-      default:
-        return 'bg-gray-500'
+        duration: 0.5
+      }
     }
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineContainerRef.current || !lineRef.current) return
+
+      const containerRect = timelineContainerRef.current.getBoundingClientRect()
+      const lineRect = lineRef.current.getBoundingClientRect()
+      const scrollProgress = Math.min(
+        Math.max(
+          (window.innerHeight - containerRect.top) /
+            (containerRect.height + window.innerHeight),
+          0
+        ),
+        1
+      )
+
+      setFillHeight(lineRect.height * scrollProgress)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -127,16 +91,16 @@ const Timeline = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <ScrollFloat
-            animationDuration={1}
-            ease='back.inOut(2)'
-            scrollStart='center bottom+=50%'
-            scrollEnd='bottom bottom-=40%'
-            stagger={0.03}
-            scrollContainerRef={window}
-          >
-            My Journey
-          </ScrollFloat>
+          <div className="flex flex-col items-center">
+            <TrueFocus
+              sentence="My Journey"
+              manualMode={false}
+              blurAmount={5}
+              borderColor="#6366f1"
+              animationDuration={2}
+              pauseBetweenAnimations={1}
+            />
+          </div>
         </motion.div>
 
         <motion.div
@@ -155,8 +119,6 @@ const Timeline = () => {
           </div>
 
           {timelineData.map((item, index) => {
-            const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
-
             return (
               <motion.div
                 key={index}
