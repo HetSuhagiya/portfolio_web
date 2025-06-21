@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import TrueFocus from "./TrueFocus";
+import { useState, useRef, useEffect } from 'react';
 
 const projects = [
   {
@@ -130,6 +131,33 @@ export default function Projects() {
     threshold: 0.1,
     triggerOnce: true
   })
+  const [current, setCurrent] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [dragWidth, setDragWidth] = useState(0);
+  const getVisibleCount = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) return 1;
+      if (window.innerWidth < 1024) return 2;
+    }
+    return 3;
+  };
+  const visibleCount = getVisibleCount();
+  useEffect(() => {
+    const updateDragWidth = () => {
+      if (carouselRef.current) {
+        const container = carouselRef.current;
+        const totalWidth = container.scrollWidth;
+        const visibleWidth = container.offsetWidth;
+        setDragWidth(totalWidth - visibleWidth);
+      }
+    };
+    updateDragWidth();
+    window.addEventListener('resize', updateDragWidth);
+    return () => window.removeEventListener('resize', updateDragWidth);
+  }, [visibleCount, projects.length]);
+  const maxIndex = Math.max(0, projects.length - visibleCount);
+  const handlePrev = () => setCurrent((c) => Math.max(0, c - 1));
+  const handleNext = () => setCurrent((c) => Math.min(maxIndex, c + 1));
 
   const handleCardClick = (project: typeof projects[0]) => {
     const projectWindow = window.open('', '_blank')
@@ -244,75 +272,88 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
+          <div className="relative">
+            <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={carouselRef}>
               <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-neutral-100 dark:bg-neutral-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                onClick={() => handleCardClick(project)}
+                className="flex gap-6"
+                drag="x"
+                dragConstraints={{ left: -dragWidth, right: 0 }}
+                whileTap={{ cursor: 'grabbing' }}
+                style={{ touchAction: 'pan-y' }}
               >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-stone-300 dark:bg-stone-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <img
-                        src={project.icon}
-                        alt={`${project.title} icon`}
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex gap-2">
-                      {project.type === 'tableau' && (
-                      <motion.a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                          className="p-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                          onClick={(e) => e.stopPropagation()}
-                      >
-                          <img src="/tableau.svg" alt="Tableau" className="w-5 h-5" />
-                      </motion.a>
-                      )}
-                      {project.github && (
-                        <motion.a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 transition-colors duration-200"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                          </svg>
-                        </motion.a>
-                      )}
-                    </div>
+                {projects.map((project, index) => (
+                  <div
+                    key={project.title}
+                    className="flex-shrink-0"
+                    style={{ flexBasis: `calc(100%/${visibleCount})`, maxWidth: `calc(100%/${visibleCount})` }}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="group bg-neutral-100 dark:bg-neutral-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                      onClick={() => handleCardClick(project)}
+                    >
+                      <div className="p-6 h-full flex flex-col">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="w-12 h-12 bg-stone-300 dark:bg-stone-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <img
+                              src={project.icon}
+                              alt={`${project.title} icon`}
+                              className="w-8 h-8 object-contain"
+                            />
+                          </div>
+                          <div className="flex gap-2">
+                            {project.type === 'tableau' && (
+                              <motion.a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={e => e.stopPropagation()}
+                              >
+                                <img src="/tableau.svg" alt="Tableau" className="w-5 h-5" />
+                              </motion.a>
+                            )}
+                            {project.github && (
+                              <motion.a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 transition-colors duration-200"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={e => e.stopPropagation()}
+                              >
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"></svg>
+                              </motion.a>
+                            )}
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                          {project.summary}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                          {project.tools.map((tool) => (
+                            <span
+                              key={tool}
+                              className="px-2.5 py-1 bg-slate-200 dark:bg-slate-700/30 text-slate-800 dark:text-slate-200 rounded-full text-xs font-medium"
+                            >
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                    {project.summary}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="px-2.5 py-1 bg-slate-200 dark:bg-slate-700/30 text-slate-800 dark:text-slate-200 rounded-full text-xs font-medium"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </motion.div>
-            ))}
+            </div>
           </div>
         </motion.div>
       </div>

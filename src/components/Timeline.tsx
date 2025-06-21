@@ -13,20 +13,21 @@ interface Milestone {
 
 const timelineData: Milestone[] = [
   {
-    date: '2023 - Present',
+    date: 'Sept 2023 - Sept 2024',
     title: 'MSc Data Science and Analytics',
     description: 'Graduated from Brunel University London with a focus on data analysis, machine learning, and statistical methods.'
   },
   {
-    date: '2022 - 2023',
-    title: 'Data Analysis Projects',
-    description: 'Developed comprehensive sales analysis dashboards using Tableau and SQL, focusing on product performance and regional insights.'
+    date: 'Project 1',
+    title: 'Household Energy Consumption Analysis',
+    description: 'The project aimed to forecast future electricity and gas usage using past consumption and weather data to help people plan, save money, and use energy more efficiently.'
   },
   {
-    date: '2021 - 2022',
-    title: 'Data Visualization Training',
-    description: 'Mastered data visualization tools including Tableau and Power BI, creating interactive dashboards and reports.'
+    date: 'Project 2',
+    title: 'Data Pipeline: Kaggle API to PostgreSQL',
+    description: 'Built a full pipeline using Kaggle API, Python, and PostgreSQL to process retail data, run SQL analyses on sales trends, and deliver insights on top products and seasonal peaks for business reporting.'
   }
+  
 ]
 
 const Timeline = () => {

@@ -5,8 +5,6 @@ import { ArrowDownIcon } from '@heroicons/react/24/solid'
 // import { useInView } from 'react-intersection-observer'
 
 export default function Hero() {
-  const letters = "Het".split("")
-
   // const [ref, inView] = useInView({
   //   threshold: 0.1,
   //   triggerOnce: true
@@ -32,22 +30,8 @@ export default function Hero() {
             >
               Data Analyst & Visualization Specialist
             </ScrollFloat> */}
-            <span className="text-indigo-500 font-handwriting inline-flex text-4xl sm:text-5xl lg:text-6xl">
-              {letters.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.3,
-                    delay: index * 0.2,
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
+            <span className="text-indigo-500 font-bold inline-flex text-4xl sm:text-5xl lg:text-6xl mb-2">
+              I am Het
             </span>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
               Data Analyst
