@@ -131,7 +131,6 @@ export default function Projects() {
     threshold: 0.1,
     triggerOnce: true
   })
-  const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [dragWidth, setDragWidth] = useState(0);
   const getVisibleCount = () => {
@@ -156,8 +155,6 @@ export default function Projects() {
     return () => window.removeEventListener('resize', updateDragWidth);
   }, [visibleCount, projects.length]);
   const maxIndex = Math.max(0, projects.length - visibleCount);
-  const handlePrev = () => setCurrent((c) => Math.max(0, c - 1));
-  const handleNext = () => setCurrent((c) => Math.min(maxIndex, c + 1));
 
   const handleCardClick = (project: typeof projects[0]) => {
     const projectWindow = window.open('', '_blank')
