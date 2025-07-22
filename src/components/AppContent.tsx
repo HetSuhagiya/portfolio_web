@@ -8,6 +8,7 @@ import Projects from './Projects'
 import Contact from './Contact'
 import Footer from './Footer'
 import Timeline from './Timeline'
+import ProjectDetail from './ProjectDetail'
 
 function AppContent() {
   return (
@@ -24,6 +25,7 @@ function AppContent() {
               <Contact />
             </>
           } />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

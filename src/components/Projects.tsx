@@ -2,6 +2,9 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import TrueFocus from "./TrueFocus";
 import { useState, useRef, useEffect } from 'react';
+import SalesDashboardCharts from './SalesDashboardCharts';
+import { useNavigate } from 'react-router-dom';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 const projects = [
   {
@@ -133,6 +136,8 @@ export default function Projects() {
   })
   const carouselRef = useRef<HTMLDivElement>(null);
   const [dragWidth, setDragWidth] = useState(0);
+  const navigate = useNavigate();
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const getVisibleCount = () => {
     if (typeof window !== 'undefined') {
       if (window.innerWidth < 640) return 1;
@@ -157,97 +162,30 @@ export default function Projects() {
   const maxIndex = Math.max(0, projects.length - visibleCount);
 
   const handleCardClick = (project: typeof projects[0]) => {
-    const projectWindow = window.open('', '_blank')
-    if (projectWindow) {
-      projectWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>${project.title}</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script src="https://cdn.tailwindcss.com"></script>
-            <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-            <script>
-              tailwind.config = {
-                darkMode: 'class',
-                theme: {
-                  extend: {
-                    colors: {
-                      // primary: {
-                      //   50: '#fff7ed',
-                      //   100: '#ffedd5',
-                      //   200: '#fed7aa',
-                      //   300: '#fdba74',
-                      //   400: '#fb923c',
-                      //   500: '#f97316',
-                      //   600: '#ea580c',
-                      //   700: '#c2410c',
-                      //   800: '#9a3412',
-                      //   900: '#7c2d12',
-                      // }
-                    }
-                  }
-                }
-              }
-            </script>
-            <style>
-              body { font-family: system-ui, -apple-system, sans-serif; }
-              .prose pre { background-color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; }
-              .dark .prose pre { background-color: #1f2937; }
-            </style>
-          </head>
-          <body class="bg-stone-50 dark:bg-stone-950 min-h-screen">
-            <div class="container mx-auto px-4 py-8 max-w-4xl">
-              <div class="bg-neutral-100 dark:bg-neutral-800 rounded-xl shadow-lg p-8">
-                <div class="flex items-start gap-4 mb-6">
-                  <div class="w-16 h-16 bg-stone-300 dark:bg-stone-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <img src="${project.icon}" alt="${project.title} icon" class="w-12 h-12 object-contain">
-                  </div>
-                  <div>
-                    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">${project.title}</h1>
-                    <div class="flex flex-wrap gap-2">
-                      ${project.tools.map(tool => `
-                        <span class="px-3 py-1 bg-stone-300 dark:bg-stone-700/30 text-gray-800 dark:text-gray-200 rounded-full text-sm font-medium">
-                          ${tool}
-                        </span>
-                      `).join('')}
-                    </div>
-                  </div>
-                </div>
-                <div class="prose max-w-none mb-8">
-                  <div class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed whitespace-pre-line">
-                    ${project.detailedSummary}
-                  </div>
-                </div>
-                <div class="flex flex-wrap gap-4">
-                  ${project.link ? `
-                    <a href="${project.link}" target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center px-6 py-3 bg-indigo-700 dark:bg-indigo-300 text-neutral-100 dark:text-neutral-900 rounded-lg hover:bg-indigo-800 dark:hover:bg-indigo-400 transition-colors duration-200">
-                      ${project.type === 'tableau' ? `
-                        <img src="/tableau.svg" alt="Tableau" class="w-5 h-5 mr-2" />
-                        View on Tableau
-                      ` : 'View Project'}
-                    </a>
-                  ` : ''}
-                  ${project.github ? `
-                    <a href="${project.github}" target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center px-6 py-3 border border-stone-300 dark:border-stone-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200">
-                      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                      </svg>
-                      View on GitHub
-                    </a>
-                  ` : ''}
-                </div>
-              </div>
-            </div>
-          </body>
-        </html>
-      `)
-      projectWindow.document.close()
+    if (project.title === 'Sales Analysis Dashboard') {
+      navigate('/projects/sales-analysis-dashboard');
     }
-  }
+    // Add more slugs for other projects as needed
+  };
+
+  const handlePrev = () => {
+    setCarouselIndex((prev) => Math.max(prev - 1, 0));
+  };
+  const handleNext = () => {
+    setCarouselIndex((prev) => Math.min(prev + 1, projects.length - visibleCount));
+  };
+
+  // Scroll to the correct card when carouselIndex changes
+  useEffect(() => {
+    if (carouselRef.current) {
+      const container = carouselRef.current;
+      const card = container.querySelectorAll('.project-card')[carouselIndex];
+      if (card) {
+        const cardLeft = (card as HTMLElement).offsetLeft;
+        container.scrollTo({ left: cardLeft, behavior: 'smooth' });
+      }
+    }
+  }, [carouselIndex]);
 
   return (
     <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -262,97 +200,100 @@ export default function Projects() {
             pauseBetweenAnimations={1}
           />
         </div>
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-6xl mx-auto"
-        >
-          <div className="relative">
-            <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={carouselRef}>
-              <motion.div
-                className="flex gap-6"
-                drag="x"
-                dragConstraints={{ left: -dragWidth, right: 0 }}
-                whileTap={{ cursor: 'grabbing' }}
-                style={{ touchAction: 'pan-y' }}
-              >
-                {projects.map((project, index) => (
+        <div className="relative flex items-center max-w-6xl mx-auto">
+          {/* Left navigation button (outside carousel) */}
+          <button
+            onClick={handlePrev}
+            className="z-10 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center text-indigo-600 hover:bg-indigo-50 disabled:opacity-40 disabled:cursor-not-allowed absolute left-[-2.5rem] md:left-[-3rem]"
+            style={{ top: '50%', transform: 'translateY(-50%)' }}
+            disabled={carouselIndex === 0}
+            aria-label="Previous projects"
+          >
+            <ChevronLeftIcon className="w-6 h-6" />
+          </button>
+          <div
+            className="overflow-x-auto scrollbar-hide w-full"
+            ref={carouselRef}
+            style={{ scrollBehavior: 'smooth' }}
+          >
+            <div className="flex gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={project.title}
+                  className="flex-shrink-0 project-card"
+                  style={{ flexBasis: `calc(100%/${visibleCount})`, maxWidth: `calc(100%/${visibleCount})` }}
+                >
                   <div
-                    key={project.title}
-                    className="flex-shrink-0"
-                    style={{ flexBasis: `calc(100%/${visibleCount})`, maxWidth: `calc(100%/${visibleCount})` }}
+                    className="group bg-neutral-100 dark:bg-neutral-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                    onClick={() => handleCardClick(project)}
                   >
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="group bg-neutral-100 dark:bg-neutral-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
-                      onClick={() => handleCardClick(project)}
-                    >
-                      <div className="p-6 h-full flex flex-col">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="w-12 h-12 bg-stone-300 dark:bg-stone-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <img
-                              src={project.icon}
-                              alt={`${project.title} icon`}
-                              className="w-8 h-8 object-contain"
-                            />
-                          </div>
-                          <div className="flex gap-2">
-                            {project.type === 'tableau' && (
-                              <motion.a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={e => e.stopPropagation()}
-                              >
-                                <img src="/tableau.svg" alt="Tableau" className="w-5 h-5" />
-                              </motion.a>
-                            )}
-                            {project.github && (
-                              <motion.a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 transition-colors duration-200"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={e => e.stopPropagation()}
-                              >
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"></svg>
-                              </motion.a>
-                            )}
-                          </div>
+                    <div className="p-6 h-full flex flex-col">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="w-12 h-12 bg-stone-300 dark:bg-stone-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <img
+                            src={project.icon}
+                            alt={`${project.title} icon`}
+                            className="w-8 h-8 object-contain"
+                          />
                         </div>
-                        <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                          {project.summary}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                          {project.tools.map((tool) => (
-                            <span
-                              key={tool}
-                              className="px-2.5 py-1 bg-slate-200 dark:bg-slate-700/30 text-slate-800 dark:text-slate-200 rounded-full text-xs font-medium"
+                        <div className="flex gap-2">
+                          {project.type === 'tableau' && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors duration-200"
+                              onClick={e => e.stopPropagation()}
                             >
-                              {tool}
-                            </span>
-                          ))}
+                              <img src="/tableau.svg" alt="Tableau" className="w-5 h-5" />
+                            </a>
+                          )}
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 transition-colors duration-200"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"></svg>
+                            </a>
+                          )}
                         </div>
                       </div>
-                    </motion.div>
+                      <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                        {project.summary}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {project.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="px-2.5 py-1 bg-slate-200 dark:bg-slate-700/30 text-slate-800 dark:text-slate-200 rounded-full text-xs font-medium"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </motion.div>
+                </div>
+              ))}
             </div>
           </div>
-        </motion.div>
+          {/* Right navigation button (outside carousel) */}
+          <button
+            onClick={handleNext}
+            className="z-10 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center text-indigo-600 hover:bg-indigo-50 disabled:opacity-40 disabled:cursor-not-allowed absolute right-[-2.5rem] md:right-[-3rem]"
+            style={{ top: '50%', transform: 'translateY(-50%)' }}
+            disabled={carouselIndex >= projects.length - visibleCount}
+            aria-label="Next projects"
+          >
+            <ChevronRightIcon className="w-6 h-6" />
+          </button>
+        </div>
       </div>
     </section>
   )
